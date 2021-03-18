@@ -79,10 +79,13 @@ export class GithubOrgReaderProcessor implements CatalogProcessor {
     const startTimestamp = Date.now();
     this.logger.info('Reading GitHub users and groups');
 
-    const { users } = await getOrganizationUsers(client, org);
+    const namespace = provider.namespace;
+
+    const { users } = await getOrganizationUsers(client, org, namespace);
     const { groups, groupMemberUsers } = await getOrganizationTeams(
       client,
       org,
+      namespace
     );
 
     const duration = ((Date.now() - startTimestamp) / 1000).toFixed(1);

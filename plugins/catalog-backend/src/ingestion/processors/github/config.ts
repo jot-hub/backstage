@@ -40,6 +40,14 @@ export type ProviderConfig = {
    * If no token is specified, anonymous access is used.
    */
   token?: string;
+
+  /**
+   * The namespace to differentiate between different Org entities (Users and Groups).
+   * This is needed if the identities (example: userid, email) are same 
+   * but the IdentityProviders are different.
+   */
+
+  namespace?: string;
 };
 
 // TODO(freben): Break out common code and config from here and GithubReaderProcessor
@@ -55,6 +63,7 @@ export function readGithubConfig(config: Config): ProviderConfig[] {
     const target = providerConfig.getString('target').replace(/\/+$/, '');
     let apiBaseUrl = providerConfig.getOptionalString('apiBaseUrl');
     const token = providerConfig.getOptionalString('token');
+    const namespace = providerConfig.getOptionalString('namespace');
 
     if (apiBaseUrl) {
       apiBaseUrl = apiBaseUrl.replace(/\/+$/, '');
@@ -68,7 +77,7 @@ export function readGithubConfig(config: Config): ProviderConfig[] {
       );
     }
 
-    providers.push({ target, apiBaseUrl, token });
+    providers.push({ target, apiBaseUrl, token, namespace });
   }
 
   // If no explicit github.com provider was added, put one in the list as

@@ -74,6 +74,7 @@ export type Connection<T> = {
 export async function getOrganizationUsers(
   client: typeof graphql,
   org: string,
+  namespace: string
 ): Promise<{ users: UserEntity[] }> {
   const query = `
     query users($org: String!, $cursor: String) {
@@ -93,6 +94,7 @@ export async function getOrganizationUsers(
       kind: 'User',
       metadata: {
         name: user.login,
+        namespace: namespace,
         annotations: {
           'github.com/user-login': user.login,
         },
@@ -133,6 +135,7 @@ export async function getOrganizationUsers(
 export async function getOrganizationTeams(
   client: typeof graphql,
   org: string,
+  namespace: string
 ): Promise<{
   groups: GroupEntity[];
   groupMemberUsers: Map<string, string[]>;
@@ -167,6 +170,7 @@ export async function getOrganizationTeams(
       kind: 'Group',
       metadata: {
         name: team.slug,
+        namespace: namespace,
         annotations: {
           'github.com/team-slug': team.combinedSlug,
         },
