@@ -48,6 +48,12 @@ export type IdentityApi = {
    * Sign out the current user
    */
   signOut(): Promise<void>;
+
+  /**
+   * Namespace of the identity.
+   * Useful when same identity is returned by multiple providers
+   */
+  getNamespace(): string;
 };
 
 export const identityApiRef: ApiRef<IdentityApi> = createApiRef({

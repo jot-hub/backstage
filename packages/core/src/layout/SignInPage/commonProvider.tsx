@@ -47,6 +47,7 @@ const Component: ProviderComponent = ({ config, onResult }) => {
         signOut: async () => {
           await authApi.signOut();
         },
+        namespace: identity.namespace
       });
     } catch (error) {
       errorApi.post(error);
@@ -90,6 +91,7 @@ const loader: ProviderLoader = async (apis, apiRef) => {
     signOut: async () => {
       await authApi.signOut();
     },
+    namespace: identity.namespace
   };
 };
 

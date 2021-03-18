@@ -32,6 +32,7 @@ import {
   OAuthRequestManager,
   googleAuthApiRef,
   githubAuthApiRef,
+  anotherGithubAuthApiRef,
   oauth2ApiRef,
   oktaAuthApiRef,
   gitlabAuthApiRef,
@@ -112,6 +113,22 @@ export const defaultApis = [
       GithubAuth.create({
         discoveryApi,
         oauthRequestApi,
+        defaultScopes: ['read:user'],
+        environment: configApi.getOptionalString('auth.environment'),
+      }),
+  }),
+  createApiFactory({
+    api: anotherGithubAuthApiRef,
+    deps: {
+      discoveryApi: discoveryApiRef,
+      oauthRequestApi: oauthRequestApiRef,
+      configApi: configApiRef,
+    },
+    factory: ({ discoveryApi, oauthRequestApi, configApi }) =>
+      GithubAuth.create({
+        discoveryApi,
+        oauthRequestApi,
+        provider: {id: 'another-github'},//important: link between config and code
         defaultScopes: ['read:user'],
         environment: configApi.getOptionalString('auth.environment'),
       }),

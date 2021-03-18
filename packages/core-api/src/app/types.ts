@@ -45,6 +45,12 @@ export type SignInResult = {
    * Sign out handler that will be called if the user requests to sign out.
    */
   signOut?: () => Promise<void>;
+
+  /**
+   * Namespace of the Authentication
+   * Useful when multiple authn providers return the same identity
+   */
+  namespace: string;
 };
 
 export type SignInPageProps = {

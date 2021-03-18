@@ -106,6 +106,7 @@ export const SingleSignInPage = ({
         signOut: async () => {
           await authApi.signOut();
         },
+        namespace: identity!.namespace
       });
     };
 

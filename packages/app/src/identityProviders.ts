@@ -19,6 +19,7 @@ import {
   gitlabAuthApiRef,
   oktaAuthApiRef,
   githubAuthApiRef,
+  anotherGithubAuthApiRef,
   samlAuthApiRef,
   microsoftAuthApiRef,
   oneloginAuthApiRef,
@@ -62,6 +63,12 @@ export const providers = [
     title: 'GitHub',
     message: 'Sign In using GitHub',
     apiRef: githubAuthApiRef,
+  },
+  {
+    id: 'another-github-auth-provider',
+    title: 'GitHub',
+    message: 'Sign In using GitHub',
+    apiRef: anotherGithubAuthApiRef,
   },
   {
     id: 'okta-auth-provider',

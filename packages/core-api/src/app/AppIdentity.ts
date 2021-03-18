@@ -27,6 +27,7 @@ export class AppIdentity implements IdentityApi {
   private profile?: ProfileInfo;
   private idTokenFunc?: () => Promise<string>;
   private signOutFunc?: () => Promise<void>;
+  private namespace: string;
 
   getUserId(): string {
     if (!this.hasIdentity) {
@@ -44,6 +45,15 @@ export class AppIdentity implements IdentityApi {
       );
     }
     return this.profile!;
+  }
+
+  getNamespace(): string {
+    if (!this.hasIdentity) {
+      throw new Error(
+        'Tried to access IdentityApi profile before app was loaded',
+      );
+    }
+    return this.namespace;
   }
 
   async getIdToken(): Promise<string | undefined> {
@@ -81,5 +91,6 @@ export class AppIdentity implements IdentityApi {
     this.profile = result.profile;
     this.idTokenFunc = result.getIdToken;
     this.signOutFunc = result.signOut;
+    this.namespace = result.namespace;
   }
 }

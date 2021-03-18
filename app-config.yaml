@@ -295,6 +295,15 @@ auth:
         enterpriseInstanceUrl:
           $env: AUTH_GITHUB_ENTERPRISE_INSTANCE_URL
         namespace: 'github-ns'
+    another-github:
+      development:
+        clientId:
+          $env: ANOTHER_AUTH_GITHUB_CLIENT_ID
+        clientSecret:
+          $env: ANOTHER_AUTH_GITHUB_CLIENT_SECRET
+        enterpriseInstanceUrl:
+          $env: ANOTHER_AUTH_GITHUB_ENTERPRISE_INSTANCE_URL
+        namespace: 'github-another-ns'
     gitlab:
       development:
         clientId:

@@ -237,6 +237,19 @@ export const githubAuthApiRef: ApiRef<
 });
 
 /**
+ * Provides authentication towards GitHub APIs.
+ *
+ * See https://developer.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/
+ * for a full list of supported scopes.
+ */
+ export const anotherGithubAuthApiRef: ApiRef<
+ OAuthApi & ProfileInfoApi & BackstageIdentityApi & SessionApi
+> = createApiRef({
+ id: 'core.auth.anothergithub',
+ description: 'Provides authentication towards GitHub APIs',
+});
+
+/**
  * Provides authentication towards Okta APIs.
  *
  * See https://developer.okta.com/docs/guides/implement-oauth-for-okta/scopes/
