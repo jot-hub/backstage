@@ -126,7 +126,6 @@ integrations:
     - host: github.com
       token:
         $env: GITHUB_TOKEN
-      namespace: github-com
     ### Example for how to add your GitHub Enterprise instance using the API:
     # - host: ghe.example.net
     #   apiBaseUrl: https://ghe.example.net/api/v3
@@ -295,6 +294,7 @@ auth:
           $env: AUTH_GITHUB_CLIENT_SECRET
         enterpriseInstanceUrl:
           $env: AUTH_GITHUB_ENTERPRISE_INSTANCE_URL
+        namespace: 'github-ns'
     gitlab:
       development:
         clientId:
