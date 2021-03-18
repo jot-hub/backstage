@@ -33,7 +33,7 @@ export function useOwnUser(): AsyncState<UserEntity | undefined> {
     () =>
       catalogApi.getEntityByName({
         kind: 'User',
-        namespace: 'default',
+        namespace: identityApi.getNamespace(),
         name: identityApi.getUserId(),
       }) as Promise<UserEntity | undefined>,
     [catalogApi, identityApi],
