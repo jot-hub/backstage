@@ -37,12 +37,15 @@ export type GithubAuthProviderOptions = OAuthProviderOptions & {
   tokenUrl?: string;
   userProfileUrl?: string;
   authorizationUrl?: string;
+  namespace?:string;
 };
 
 export class GithubAuthProvider implements OAuthHandlers {
   private readonly _strategy: GithubStrategy;
+  private readonly _namespace: string;
 
   constructor(options: GithubAuthProviderOptions) {
+    this._namespace = options.namespace;
     this._strategy = new GithubStrategy(
       {
         clientID: options.clientId,
@@ -96,6 +99,7 @@ export class GithubAuthProvider implements OAuthHandlers {
         },
         backstageIdentity: {
           id: fullProfile.username || fullProfile.id,
+          namespace: this._namespace
         },
       },
     };
@@ -124,6 +128,7 @@ export const createGithubProvider = (
         ? `${enterpriseInstanceUrl}/api/v3/user`
         : undefined;
       const callbackUrl = `${globalConfig.baseUrl}/${providerId}/handler/frame`;
+      const namespace = envConfig.getOptionalString("namespace");
 
       const provider = new GithubAuthProvider({
         clientId,
@@ -132,6 +137,7 @@ export const createGithubProvider = (
         tokenUrl,
         userProfileUrl,
         authorizationUrl,
+        namespace
       });
 
       return OAuthAdapter.fromConfig(globalConfig, provider, {

@@ -156,6 +156,11 @@ export type BackstageIdentity = {
    * An ID token that can be used to authenticate the user within Backstage.
    */
   idToken?: string;
+
+  /**
+   * Namespace if there are multiple providers returning the same identity value.
+   */
+  namespace?: string;
 };
 
 /**
